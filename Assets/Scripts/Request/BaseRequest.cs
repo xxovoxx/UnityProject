@@ -3,39 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProtoBuf;
 using SocketProtocol;
+using Scripts.Request;
 
-public class BaseRequest : MonoBehaviour//
+namespace Scripts.Request
 {
-    protected Main main;
-    protected RequestCode requestCode;
-    protected ActionCode actionCode;
-    public ActionCode GetActionCode
+    public class BaseRequest : MonoBehaviour//
     {
-        get
+        protected Main main;
+        protected RequestCode requestCode;
+        protected ActionCode actionCode;
+        public ActionCode GetActionCode
         {
-            return actionCode;
+            get
+            {
+                return actionCode;
+            }
         }
-    }
-    public virtual void Awake()
-    {
-        main =  Main.GetMain;
-    }
-    public virtual void Start()
-    {
-        main.AddRequest(this);
-    }
-    
-    public virtual void OnDestroy()
-    {
-        main.RemoveRequest(actionCode);
-    }
+        public virtual void Awake()
+        {
+            main = Main.GetMain;
+        }
+        public virtual void Start()
+        {
+            main.AddRequest(this);
+        }
 
-    public virtual void OnResponse(MainPack pack)//接收请求
-    {
+        public virtual void OnDestroy()
+        {
+            main.RemoveRequest(actionCode);
+        }
 
-    }
-    public virtual void SendRequest(MainPack pack)
-    {
-        main.Send(pack);
+        public virtual void OnResponse(MainPack pack)//接收请求
+        {
+
+        }
+        public virtual void SendRequest(MainPack pack)
+        {
+            main.Send(pack);
+        }
     }
 }

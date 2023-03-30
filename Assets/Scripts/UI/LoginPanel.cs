@@ -3,33 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Scripts.Request;
+using Scripts.Enums;
 
 namespace Scripts.UI
 {
-    public class RegisterPanel : BasePanel
+    public class LoginPanel : BasePanel
     {
-        public RegisterRequest registerRequest;
-        public TMP_InputField displayName, account, password;
-        public Button RegisterButton, EnterLoginButton;
+        public Button EnterRegisterButton;
+
         private void Start()
         {
-            RegisterButton.onClick.AddListener(OnRegisterClick);
-            EnterLoginButton.onClick.AddListener(EnterLogin);
-        }
-        private void OnRegisterClick()
-        {
-            if(displayName.text == "" || account.text == "" || password.text =="")
-            {
-                Debug.LogWarning("显示名、用户名、密码不得为空");
-                return;
-            }
-            registerRequest.SendRequest(displayName.text, account.text, password.text);
+            EnterRegisterButton.onClick.AddListener(OnEnterRegisterButtonClick);    
         }
 
-        private void EnterLogin()
+        private void OnEnterRegisterButtonClick()
         {
-            uiSystem.PopUI();
+            uiSystem.PushUI(UIType.Register);
         }
 
         public override void OnEnter()

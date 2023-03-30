@@ -5,6 +5,7 @@ UserSettings/
 obj/
 .vscode/
 Packages/
+Assets/Resources/LargeFile/
 *.sln
 *.csproj
 *.sln

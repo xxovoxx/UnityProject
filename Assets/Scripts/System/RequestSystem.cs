@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ProtoBuf;
 using SocketProtocol;
+using Scripts.Request;
 
 namespace Scripts.System
 {

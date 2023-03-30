@@ -4,11 +4,13 @@ using UnityEngine;
 using Scripts.System;
 using ProtoBuf;
 using SocketProtocol;
+using Scripts.Request;
 
 public class Main : MonoBehaviour
 {
     private ClientSystem clientSystem;
     private RequestSystem requestSystem;
+    private UISystem uiSystem;
     private static Main main;
     public static Main GetMain
     {
@@ -25,15 +27,18 @@ public class Main : MonoBehaviour
     {
         clientSystem = new ClientSystem(this);
         requestSystem = new RequestSystem(this);
+        uiSystem = new UISystem(this);
         
         clientSystem.OnInit();
         requestSystem.OnInit();
+        uiSystem.OnInit();
     }
 
     void OnDestroy()
     {
         clientSystem.OnDestroy();
         requestSystem.OnDestroy();
+        uiSystem.OnDestroy();
     }
     
 
