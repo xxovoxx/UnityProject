@@ -1,22 +1,20 @@
+using Scripts.UI;
+using SocketProtocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ProtoBuf;
-using SocketProtocol;
-using Scripts.UI;
 
 namespace Scripts.Request
 {
-    //注册请求
-    public class RegisterRequest : BaseRequest
+    public class CreateRoomRequest : BaseRequest
     {
-        public RegisterPanel registerPanel;
+        public RoomListPanel roomListPanel;
 
         private MainPack pack = null;
         public override void Awake()
         {
-            requestCode = RequestCode.User;
-            actionCode = ActionCode.Register;
+            requestCode = RequestCode.Room;
+            actionCode = ActionCode.CreateRoom;
             base.Awake();
         }
 
@@ -25,7 +23,7 @@ namespace Scripts.Request
         {
             if (pack != null)
             {
-                registerPanel.OnResponse(pack);
+                roomListPanel.CreateRoomResponse(pack);
                 pack = null;
             }
         }
@@ -34,16 +32,16 @@ namespace Scripts.Request
         {
             this.pack = pack;
         }
-        public void SendRequest(string displayName, string account, string password)
+
+        public void SendRequest(string roomName,int maxNum)
         {
             MainPack pack = new MainPack();
             pack.requestCode = requestCode;
             pack.actionCode = actionCode;
-            RegisterPack registerPack = new RegisterPack();
-            registerPack.DisplayName = displayName;
-            registerPack.Account = account;
-            registerPack.Password = password;
-            pack.registerPack = registerPack;
+            RoomPack room= new RoomPack();
+            room.RoomName = roomName;
+            room.MaxNum = maxNum;
+            pack.roomPacks.Add(room);
             base.SendRequest(pack);
         }
     }

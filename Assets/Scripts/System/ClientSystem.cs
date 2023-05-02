@@ -28,17 +28,21 @@ namespace Scripts.System
             message = null;
             CloseSocket();
         }
-        private void InitSocket()//初始化socket连接
+
+        //初始化socket连接
+        private void InitSocket()
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//TCP连接
             try
             {
                 socket.Connect("127.0.0.1", 23346);
                 StartReceive();
+                main.ShowMessage("成功连接至服务器", true);
             }
             catch (Exception e)
             {
                 Debug.Log(e);
+                main.ShowMessage("连接至服务器失败!请重启", true);
             }
         }
         private void CloseSocket()//关闭socket连接

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Scripts.System;
+using SocketProtocol;
 
 namespace Scripts.UI
 {
@@ -15,6 +16,8 @@ namespace Scripts.UI
                 uiSystem = value;
             }
         }
+
+
         public virtual void OnEnter()//用于创建时初始化
         {
 

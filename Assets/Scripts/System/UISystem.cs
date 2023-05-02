@@ -14,12 +14,14 @@ namespace Scripts.System
         private Dictionary<UIType, string> uiPath = new Dictionary<UIType, string>();//储存预制体的地址
         private Stack<BasePanel> uiStack = new Stack<BasePanel>();//用堆栈来管理UI的显示
         private Transform canvaTransform;//用于获取场景里的画布对象的位置
+        private TopRightMessagePanel topRightMessagePanel;
 
         public override void OnInit()
         {
             base.OnInit();
             InitUI();
             canvaTransform = GameObject.Find("Canvas").transform;
+            PushUI(UIType.TopRightMessage);
             PushUI(UIType.Login);
         }
 
@@ -43,7 +45,7 @@ namespace Scripts.System
             }
         }
 
-        public  void PopUI()//关闭UI
+        public void PopUI()//关闭UI
         {
             if(uiStack.Count == 0) return;
             BasePanel topPanel = uiStack.Pop();
@@ -69,6 +71,16 @@ namespace Scripts.System
             }
         }
 
+        public void SetTopRightMessagePanel(TopRightMessagePanel topRightMessagePanel)
+        {
+            this.topRightMessagePanel = topRightMessagePanel;
+        }
+
+        public void ShowMessage(string str, bool isSync = false)
+        {
+            topRightMessagePanel.ShowMessage(str, isSync);
+        }
+
         private void InitUI()//添加UI预制体的文件路径
         {
             string folderPath = "Prefab/UI/";
@@ -76,6 +88,8 @@ namespace Scripts.System
             uiPath.Add(UIType.Register, folderPath + "Register");
             uiPath.Add(UIType.MainMenu, folderPath + "MainMenu");
             uiPath.Add(UIType.TopRightMessage, folderPath + "TopRightMessage");
+            uiPath.Add(UIType.RoomList, folderPath + "RoomList");
+            uiPath.Add(UIType.Room, folderPath + "Room");
         }
     }
 }

@@ -1,31 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ProtoBuf;
 using SocketProtocol;
 using Scripts.UI;
 
 namespace Scripts.Request
 {
-    //注册请求
-    public class RegisterRequest : BaseRequest
+    public class LoginRequest : BaseRequest
     {
-        public RegisterPanel registerPanel;
+        public LoginPanel loginPanel;
 
         private MainPack pack = null;
         public override void Awake()
         {
             requestCode = RequestCode.User;
-            actionCode = ActionCode.Register;
+            actionCode = ActionCode.Login;
             base.Awake();
         }
 
-        //将异步操作回归主线程
         private void Update()
         {
             if (pack != null)
             {
-                registerPanel.OnResponse(pack);
+                loginPanel.OnResponse(pack);
                 pack = null;
             }
         }
@@ -34,16 +31,17 @@ namespace Scripts.Request
         {
             this.pack = pack;
         }
-        public void SendRequest(string displayName, string account, string password)
+
+        public void SendRequest(string account, string password)
         {
             MainPack pack = new MainPack();
             pack.requestCode = requestCode;
             pack.actionCode = actionCode;
-            RegisterPack registerPack = new RegisterPack();
-            registerPack.DisplayName = displayName;
-            registerPack.Account = account;
-            registerPack.Password = password;
-            pack.registerPack = registerPack;
+            LoginPack loginPack = new LoginPack();
+            loginPack.Account = account;
+            loginPack.Password = password;
+            pack.loginPack = loginPack;
+            
             base.SendRequest(pack);
         }
     }

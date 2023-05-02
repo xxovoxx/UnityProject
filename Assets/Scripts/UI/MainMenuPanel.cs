@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
+using Scripts.Enums;
 
 namespace Scripts.UI
 {
     public class MainMenuPanel : BasePanel
     {
-        public Button EnterRegisterButton;
+        public Button EnterRoomListButton;
+
+        private void Start()
+        {
+            EnterRoomListButton.onClick.AddListener(OnEnterRoomListButtonClick);
+        }
+
+        private void OnEnterRoomListButtonClick()
+        {
+            uiSystem.PushUI(UIType.RoomList);
+        }
 
         public override void OnEnter()
         {

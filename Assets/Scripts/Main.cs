@@ -6,6 +6,7 @@ using ProtoBuf;
 using SocketProtocol;
 using Scripts.Request;
 
+//主进程 用于调用各个系统
 public class Main : MonoBehaviour
 {
     private ClientSystem clientSystem;
@@ -25,13 +26,13 @@ public class Main : MonoBehaviour
     }
     void Awake()
     {
+        uiSystem = new UISystem(this);
         clientSystem = new ClientSystem(this);
         requestSystem = new RequestSystem(this);
-        uiSystem = new UISystem(this);
         
+        uiSystem.OnInit();
         clientSystem.OnInit();
         requestSystem.OnInit();
-        uiSystem.OnInit();
     }
 
     void OnDestroy()
@@ -59,5 +60,10 @@ public class Main : MonoBehaviour
     public void RemoveRequest(ActionCode action)
     {
         requestSystem.RemoveRequest(action);
+    }
+
+    public void ShowMessage(string str, bool isSync = false)
+    {
+        uiSystem.ShowMessage(str, isSync);
     }
 }
