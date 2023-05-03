@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using SocketProtocol;
+using Scripts.Request;
 
 namespace Scripts.UI
 {
