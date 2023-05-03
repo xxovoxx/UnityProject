@@ -5,35 +5,45 @@ using UnityEngine.UI;
 using TMPro;
 using SocketProtocol;
 using Scripts.System;
+using Scripts.Enums;
+using UnityEngine.Rendering.VirtualTexturing;
+using Scripts.Request;
 
-public class RoomItem : MonoBehaviour
+namespace Scripts.UI
 {
-    public Button JoinButton;
-    public TMP_Text title, num, state;
-
-    private void Start()
+    public class RoomItem : MonoBehaviour
     {
-        JoinButton.onClick.AddListener(OnJoinButtonClick);
-    }
+        public RoomListPanel roomListPanel;
 
-    private void OnJoinButtonClick()
-    {
+        public Button JoinButton;
+        public TMP_Text title, num, state;
+        private int roomID;
 
-    }
-
-    public void SetRoomInfo(RoomPack roomPack)
-    {
-        this.title.text = roomPack.RoomName;
-        this.num.text = roomPack.CurrentNum + "/" + roomPack.MaxNum;
-
-        switch (roomPack.roomState)
+        private void Start()
         {
-            case RoomState.InGame:
-                this.state.text = "InGame";
-                break;
-            case RoomState.OutOfGame:
-                this.state.text = "OutOFGame";
-                break;
+            JoinButton.onClick.AddListener(OnJoinButtonClick);
+        }
+
+        private void OnJoinButtonClick()
+        {
+            roomListPanel.JoinRoom(roomID);
+        }
+
+        public void SetRoomInfo(RoomPack roomPack)
+        {
+            this.title.text = roomPack.RoomName;
+            this.num.text = roomPack.CurrentNum + "/" + roomPack.MaxNum;
+            this.roomID = roomPack.Id;
+
+            switch (roomPack.roomState)
+            {
+                case RoomState.InGame:
+                    this.state.text = "InGame";
+                    break;
+                case RoomState.OutOfGame:
+                    this.state.text = "OutOFGame";
+                    break;
+            }
         }
     }
 }

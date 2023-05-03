@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 2006071432060373761}
   - component: {fileID: 635430206896730532}
   - component: {fileID: 7874161243383689800}
+  - component: {fileID: 8339584549481444824}
   m_Layer: 5
   m_Name: RoomList
   m_TagString: Untagged
@@ -435,6 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createRoomRequest: {fileID: 635430206896730532}
   findRoomRequest: {fileID: 7874161243383689800}
+  joinRoomRequest: {fileID: 8339584549481444824}
   EnterMainMenuButton: {fileID: 1135759627028804247}
   CreateRoomButton: {fileID: 7318641880693447577}
   RefreshButton: {fileID: 8582900242628745560}
@@ -467,6 +469,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3efefc3cc78aafc4abd01b88fc2121d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomListPanel: {fileID: 2006071432060373761}
+--- !u!114 &8339584549481444824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135759625615973023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 161163394b65d0141a4ba0bfaa8c124a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   roomListPanel: {fileID: 2006071432060373761}

@@ -14,6 +14,8 @@ namespace Scripts.UI
     {
         public CreateRoomRequest createRoomRequest;
         public FindRoomRequest findRoomRequest;
+        public JoinRoomRequest joinRoomRequest;
+
         public Button EnterMainMenuButton, CreateRoomButton, RefreshButton;
         public Transform roomList;
         public GameObject roomItem;
@@ -56,7 +58,8 @@ namespace Scripts.UI
                 case ReturnCode.Succeed:
                     Debug.Log("创建房间成功");
                     uiSystem.ShowMessage("创建房间成功!");
-                    uiSystem.PushUI(UIType.Room);
+                    RoomPanel roomPanel = uiSystem.PushUI(UIType.Room).GetComponent<RoomPanel>();
+                    roomPanel.UpdatePlayerList(pack.playerPacks);
                     break;
                 case ReturnCode.Failed:
                     Debug.LogWarning("创建房间失败!");
@@ -81,6 +84,28 @@ namespace Scripts.UI
             }
         }
 
+        public void JoinResponse(MainPack pack)
+        {
+            switch (pack.returnCode)
+            {
+                case ReturnCode.Succeed:
+                    Debug.Log("加入房间成功");
+                    uiSystem.ShowMessage("加入房间成功!");
+                    RoomPanel roomPanel = uiSystem.PushUI(UIType.Room).GetComponent<RoomPanel>();
+                    roomPanel.UpdatePlayerList(pack.playerPacks);
+                    break;
+                case ReturnCode.Failed:
+                    Debug.LogWarning("加入房间失败!");
+                    uiSystem.ShowMessage("加入房间失败,请重试!");
+                    break;
+            }
+        }
+
+        public void JoinRoom(int roomID)
+        {
+            joinRoomRequest.SendRequest(roomID);
+        }
+
         private void UpdateRoomList(List<RoomPack> rooms)
         {
             //清空房间列表
@@ -92,6 +117,7 @@ namespace Scripts.UI
             foreach(RoomPack roomPack in rooms) 
             {
                 RoomItem item = Instantiate(roomItem, roomList).GetComponent<RoomItem>();
+                item.roomListPanel = this;
                 item.SetRoomInfo(roomPack);
             }
         }

@@ -623,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804bb7949109c9744a7c62eae3ec4def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomListPanel: {fileID: 0}
   JoinButton: {fileID: 2499263830541231885}
   title: {fileID: 26295403232121384}
   num: {fileID: 4046563445692609973}

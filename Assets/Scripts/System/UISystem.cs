@@ -25,7 +25,7 @@ namespace Scripts.System
             PushUI(UIType.Login);
         }
 
-        public void PushUI(UIType ui)//显示ui
+        public BasePanel PushUI(UIType ui)//显示ui
         {
             if(uiDict.TryGetValue(ui, out BasePanel panel))//看看有没有生成过这个UI
             {
@@ -37,11 +37,12 @@ namespace Scripts.System
 
                 uiStack.Push(panel);
                 panel.OnEnter();
+                return panel;
             }
             else
             {
                 SpawnUI(ui);
-                PushUI(ui);
+                return PushUI(ui);
             }
         }
 
